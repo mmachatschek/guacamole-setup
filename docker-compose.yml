@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  guacamole:
+    image: guacamole/guacamole:1.0.0
+    env_file:
+      - ./.guacamole.env
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+      - guacd
+
+  guacd:
+    image: guacamole/guacd:1.0.0
+
+  mysql:
+    build:
+      context: ./
+      dockerfile: mysql.Dockerfile
+    restart: always
+    env_file:
+      - ./.mysql.env
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+      - type: bind
+        source: ./initdb.sql
+        target: /docker-entrypoint-initdb.d/initdb.sql
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
