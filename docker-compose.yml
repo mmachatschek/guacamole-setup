@@ -2,7 +2,7 @@ version: "2"
 
 services:
   guacamole:
-    image: guacamole/guacamole:1.1.0
+    image: guacamole/guacamole:1.3.0
     env_file:
       - ./.guacamole.env
     ports:
@@ -12,7 +12,7 @@ services:
       - guacd
 
   guacd:
-    image: guacamole/guacd:1.1.0
+    image: guacamole/guacd:1.3.0
 
   mysql:
     build:
