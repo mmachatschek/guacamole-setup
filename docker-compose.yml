@@ -3,6 +3,7 @@ version: "2"
 services:
   guacamole:
     image: guacamole/guacamole:1.3.0
+    restart: always
     env_file:
       - ./.guacamole.env
     ports:
@@ -13,6 +14,7 @@ services:
 
   guacd:
     image: guacamole/guacd:1.3.0
+    restart: always
 
   mysql:
     build:
