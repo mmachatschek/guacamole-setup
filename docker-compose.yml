@@ -17,14 +17,13 @@ services:
     restart: always
 
   mysql:
-    build:
-      context: ./
-      dockerfile: mysql.Dockerfile
+    image: mysql:8.0
     restart: always
     env_file:
       - ./.mysql.env
     volumes:
       - guacamole-mysql-data:/var/lib/mysql
+      - ./initdb.sql:/docker-entrypoint-initdb.d/guacamoleinitdb.sql
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
 
 volumes:
